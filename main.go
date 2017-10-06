@@ -83,16 +83,17 @@ func main() {
 	// Iterate over each one of the files
 	results := make([]parsedData, 0, len(tffiles))
 	for _, v := range tffiles {
-		results = append(results, parseProvider(fset, v))
+		results = append(results, parseProvider(internalName, fset, v))
 	}
 
 	// Print the output
 	for _, v := range results {
 		fmt.Println("Filename:", v.Filename)
+		fmt.Println("Is provider config?:", v.IsMainProvider)
 		fmt.Println("Resource name:", v.ResourceName)
 
 		for _, j := range v.ResourceDefinition {
-			fmt.Println("\t ", fmt.Sprintf("%v", j))
+			fmt.Println("\t ", fmt.Sprintf("%#v", j))
 		}
 	}
 
