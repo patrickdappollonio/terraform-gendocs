@@ -7,6 +7,8 @@ Right now, when used with `terraform-provider-dreamcloud` we got the output belo
 it requires some fine-tuning -- since it's showing all the parameters as Go code -- as well as
 some formatting, but it's definitely achievable.
 
+For a more clear explanation, feel free to use the [AST viewer from Yuroyoro here](http://goast.yuroyoro.net/).
+
 ```text
 File: resource_automount_key.go
 main.docDefinition{Name:"name", Type:"String", Optional:false, Computed:false, Required:false, ForceNew:true}
