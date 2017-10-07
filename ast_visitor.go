@@ -89,7 +89,7 @@ func (w *visitorProvider) Visit(node ast.Node) ast.Visitor {
 		}
 
 		// Check now if type list, then we need to dereference all the inner parameters
-		if dd.Type == "list" && kvk.Name == "Elem" {
+		if (dd.Type == "list" || dd.Type == "set") && kvk.Name == "Elem" {
 			// Get the inner value. If we pass the previous validations we can
 			// assume it's a terraform project. Otherwise this double type assertion
 			// will fail
@@ -108,7 +108,11 @@ func (w *visitorProvider) Visit(node ast.Node) ast.Visitor {
 
 				// Then change the name to be "List (of []string)" or whatever the
 				// actual type detected is
-				dd.Type = fmt.Sprintf("%s (of []%s)", dd.Type, strings.ToLower(strings.TrimPrefix(local, "Type")))
+				if dd.Type == "list" {
+					dd.Type = fmt.Sprintf("%s (of []%s)", dd.Type, strings.ToLower(strings.TrimPrefix(local, "Type")))
+				} else {
+					dd.Type = fmt.Sprintf("%s (of %s)", dd.Type, strings.ToLower(strings.TrimPrefix(local, "Type")))
+				}
 			}
 
 			if kind == "Resource" {
