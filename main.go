@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"go/token"
 	"io/ioutil"
 	"os"
@@ -89,21 +88,5 @@ func main() {
 
 	// Print the output
 	sort.Sort(byProviderResource(results))
-	// printOutput(os.Stdout, results)
-
-	enc := json.NewEncoder(os.Stdout)
-	enc.SetIndent("", "\t")
-	enc.Encode(results)
-
-	// Print the output
-	// for _, v := range results {
-	// fmt.Println("Filename:", v.Filename)
-	// fmt.Println("Is provider config?:", v.IsMainProvider)
-	// fmt.Println("Resource name:", v.ResourceName)
-	//
-	// for _, j := range v.ResourceDefinition {
-	// fmt.Println("\t ", fmt.Sprintf("%#v", j))
-	// }
-	// }
-
+	printOutput(os.Stdout, results)
 }
