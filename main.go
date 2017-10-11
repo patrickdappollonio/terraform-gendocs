@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"go/token"
 	"io/ioutil"
 	"os"
@@ -11,8 +12,14 @@ import (
 
 func main() {
 	// Find if a second argument is passed
-	if len(os.Args) != 2 {
-		errexit("Usage: terraform-gendocs {go-import-path}")
+	if len(os.Args) != 3 {
+		errexit("Usage: terraform-gendocs {go-import-path} {format (html|hcl)}")
+	}
+
+	// Define the format
+	exportFormat := os.Args[2]
+	if exportFormat != "html" && exportFormat != "hcl" {
+		errexit("Wrong 'format' parameter. Use 'html' or 'hcl'.\nUsage: terraform-gendocs {go-import-path} {format (html|hcl)}")
 	}
 
 	// Find if there's a $GOPATH
@@ -88,5 +95,36 @@ func main() {
 
 	// Print the output
 	sort.Sort(byProviderResource(results))
-	printOutput(os.Stdout, results)
+
+	// Output filename
+	var (
+		fileName = fmt.Sprintf("%s-docs", internalName)
+		attrib   = int(os.O_RDWR | os.O_CREATE)
+		perms    = os.FileMode(0644)
+	)
+
+	switch exportFormat {
+	case "hcl":
+		// Create an exported file (or update if it already exists) with proper permissions
+		f, err := os.OpenFile(fmt.Sprintf("./%s.tf", fileName), attrib, perms)
+		if err != nil {
+			errexit("Unable to save HCL output: %s", err.Error())
+		}
+
+		// Close once we're ready
+		defer f.Close()
+
+		printOutput(f, results)
+	case "html":
+		// Create an exported file (or update if it already exists) with proper permissions
+		f, err := os.OpenFile(fmt.Sprintf("./%s.tf", fileName), attrib, perms)
+		if err != nil {
+			errexit("Unable to save HCL output: %s", err.Error())
+		}
+
+		// Close once we're ready
+		defer f.Close()
+
+		printHTMLOutput(f, results)
+	}
 }
