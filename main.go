@@ -117,7 +117,7 @@ func main() {
 		printOutput(f, results)
 	case "html":
 		// Create an exported file (or update if it already exists) with proper permissions
-		f, err := os.OpenFile(fmt.Sprintf("./%s.tf", fileName), attrib, perms)
+		f, err := os.OpenFile(fmt.Sprintf("./%s.html", fileName), attrib, perms)
 		if err != nil {
 			errexit("Unable to save HCL output: %s", err.Error())
 		}
