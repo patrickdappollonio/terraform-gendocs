@@ -61,7 +61,7 @@ var (
 		},
 	}
 
-	t = template.Must(template.New(outputName).Funcs(fm).ParseFiles(outputName))
+	t = template.Must(template.New(outputName).Funcs(fm).Parse(httpServerTemplate))
 )
 
 type res struct {

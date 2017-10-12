@@ -1,2 +1,3 @@
 *.tf
 *.html
+terraform-gendocs

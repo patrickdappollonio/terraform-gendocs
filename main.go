@@ -10,6 +10,8 @@ import (
 	"strings"
 )
 
+//go:generate go run generator.go
+
 const help = "Usage: terraform-gendocs {go-import-path} {format (html|hcl)}"
 
 func main() {
