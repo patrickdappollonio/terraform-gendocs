@@ -73,10 +73,12 @@ type res struct {
 
 func printHTMLOutput(w io.Writer, data []parsedData) {
 	res := recursivelyFlatten(data)
+	pn := findProviderName(data)
 
 	bundle := map[string]interface{}{
-		"Title":   fmt.Sprintf("Documentation for %q Provider", findProviderName(data)),
-		"Details": res,
+		"Title":     fmt.Sprintf("Documentation for %q Provider", pn),
+		"PageTitle": fmt.Sprintf("Provider %q", pn),
+		"Details":   res,
 	}
 
 	if err := t.Execute(w, bundle); err != nil {
