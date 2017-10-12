@@ -10,16 +10,24 @@ import (
 	"strings"
 )
 
+const help = "Usage: terraform-gendocs {go-import-path} {format (html|hcl)}"
+
 func main() {
+	// Check if it's help
+	if len(os.Args) > 2 && (os.Args[1] == "--help" || os.Args[1] == "-h") {
+		fmt.Fprintln(os.Stderr, help)
+		os.Exit(0)
+	}
+
 	// Find if a second argument is passed
 	if len(os.Args) != 3 {
-		errexit("Usage: terraform-gendocs {go-import-path} {format (html|hcl)}")
+		errexit(help)
 	}
 
 	// Define the format
 	exportFormat := os.Args[2]
 	if exportFormat != "html" && exportFormat != "hcl" {
-		errexit("Wrong 'format' parameter. Use 'html' or 'hcl'.\nUsage: terraform-gendocs {go-import-path} {format (html|hcl)}")
+		errexit("Wrong 'format' parameter. Use 'html' or 'hcl'.\n%s", help)
 	}
 
 	// Find if there's a $GOPATH
