@@ -1,4 +1,4 @@
-# Terraform Gendocs
+# Terraform Gendocs [![Build Status](https://travis-ci.org/patrickdappollonio/terraform-gendocs.svg?branch=master)](https://travis-ci.org/patrickdappollonio/terraform-gendocs)
 
 This is a small Go project that parses the Go syntax tree pretty much like the compiler does,
 fetches the parameters from the Terraform Schema definition and retrieves them for later use.
