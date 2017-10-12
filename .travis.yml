@@ -1,0 +1,26 @@
+sudo: required
+
+services:
+	- docker
+
+language: go
+go:
+	- 1.8.3
+
+env:
+	global:
+		- IMAGE_TAG=patrickdappollonio/terraform-gendocs
+
+install:
+	- # empty to avoid getting dependencies
+
+script:
+	- CGO_ENABLED=0 go build -a -tags netgo -ldflags '-s -w' -o terraform-gendocs
+	- docker build --pull=true --rm=true -t $IMAGE_TAG .
+  - docker run -it $IMAGE_TAG /bin/ash -c "terraform-gendocs -h"
+
+after_success:
+	- if [ "$TRAVIS_BRANCH" == "master" ]; then
+		docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+		docker push $IMAGE_TAG;
+		fi
