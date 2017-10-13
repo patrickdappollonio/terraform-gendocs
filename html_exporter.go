@@ -6,6 +6,7 @@ import (
 	"io"
 	"path"
 	"strings"
+	"time"
 )
 
 const outputName = "output.tmpl"
@@ -79,6 +80,7 @@ func printHTMLOutput(w io.Writer, data []parsedData) {
 		"Title":     fmt.Sprintf("Documentation for %q Provider", pn),
 		"PageTitle": fmt.Sprintf("Provider %q", pn),
 		"Details":   res,
+		"Updated":   time.Now().Format(time.RFC1123),
 	}
 
 	if err := t.Execute(w, bundle); err != nil {
