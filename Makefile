@@ -19,6 +19,7 @@ docker:
 	docker build --pull=true --rm=true -t $(IMAGE_TAG) .
 
 release:
+	@$(MAKE) clean
 	@$(MAKE) generate
 	@$(MAKE) build
 	@$(MAKE) remove-gen
