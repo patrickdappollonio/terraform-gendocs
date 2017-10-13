@@ -1,2 +1,2 @@
-FROM alpine
-ADD terraform-gendocs /usr/local/bin
+FROM golang
+ADD terraform-gendocs $GOPATH/bin
