@@ -16,7 +16,7 @@ install:
 
 script:
   - make ci
-  - docker run -it $IMAGE_TAG /bin/ash -c "terraform-gendocs -h"
+  - docker run -it $IMAGE_TAG /bin/bash -c "terraform-gendocs -h"
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
