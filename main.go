@@ -12,7 +12,7 @@ import (
 
 //go:generate go run generator.go
 
-const help = "Usage: terraform-gendocs {go-import-path} {format (html|hcl)}"
+const help = "Usage: terraform-gendocs {go-import-path} {format (html|hcl)} {filename}"
 
 func main() {
 	// Check if it's help
@@ -24,7 +24,7 @@ func main() {
 	}
 
 	// Find if a second argument is passed
-	if len(os.Args) != 3 {
+	if len(os.Args) != 4 {
 		errexit(help)
 	}
 
@@ -110,10 +110,16 @@ func main() {
 
 	// Output filename
 	var (
-		fileName = fmt.Sprintf("%s-docs", internalName)
-		attrib   = int(os.O_RDWR | os.O_CREATE)
-		perms    = os.FileMode(0644)
+		fileName    = fmt.Sprintf("%s-docs", internalName)
+		attrib      = int(os.O_RDWR | os.O_CREATE)
+		perms       = os.FileMode(0644)
+		desiredName = slugify(os.Args[3])
 	)
+
+	// Check what we will use
+	if desiredName != "" {
+		fileName = desiredName
+	}
 
 	switch exportFormat {
 	case "hcl":
