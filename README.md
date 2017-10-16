@@ -57,7 +57,7 @@ terraform-gendocs github.com/HewlettPackard/terraform-provider-oneview hcl mytf 
 ### Example HTML UI
 
 This is an example from the [`terraform-provider-aws`](https://github.com/terraform-providers/terraform-provider-aws) which
-unfortunately it can't be properly parsed -- although PRs are welcome if you want to improve it! But you can see most of
-the definitions as well as the jump-to-definition menu here.
+unfortunately it can't be properly parsed due to some resources not being inlined (see "provider assumptions" section, last bullet point)
+-- although PRs are welcome if you want to improve it! But you can see most of the definitions as well as the jump-to-definition menu here.
 
 ![AWS Provider Docs](https://i.imgur.com/8X0mWR0.png)
