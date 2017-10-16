@@ -53,3 +53,11 @@ Some example calls will be:
 terraform-gendocs github.com/HewlettPackard/terraform-provider-oneview html      # this will generate an HTML documentation for `terraform-provider-oneview` in an output file called `terraform-docs.html`
 terraform-gendocs github.com/HewlettPackard/terraform-provider-oneview hcl mytf  # this will generate an HCL .tf documentation for `terraform-provider-oneview` in an output file called `mytf.tf`
 ```
+
+### Example HTML UI
+
+This is an example from the [`terraform-provider-aws`](https://github.com/terraform-providers/terraform-provider-aws) which
+unfortunately it can't be properly parsed -- although PRs are welcome if you want to improve it! But you can see most of
+the definitions as well as the jump-to-definition menu here.
+
+![AWS Provider Docs](https://i.imgur.com/8X0mWR0.png)
