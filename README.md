@@ -11,7 +11,7 @@ Unfortunately, due to the usage of `go/ast` it's not possible to parse every sin
 if your provider follows some standard format like [`terraform-provider-oneview`](https://github.com/HewlettPackard/terraform-provider-oneview)
 with the following assumptions, then this tool can handle the documentation for you.
 
-## Provider assumptions
+### Provider assumptions
 
 * You have a provider in a repository with the format `${hostname}/${username}/terraform-provider-${provider-name}`.
   It can be nested under multiple folders, but the important part is that the provider name follows the convention
@@ -28,7 +28,7 @@ with the following assumptions, then this tool can handle the documentation for 
 * The resource Go file defines the parameters for the provider itself using a `return &schema.Resource{}` format. The
   parameters are inlined in the same return statement.
 
-## Usage mode
+### Usage mode
 
 `terraform-gendocs` expects a minimum of 2 parameters and a maximum of 3:
 
@@ -46,3 +46,10 @@ terraform-gendocs $IMPORT_PATH $FORMAT [$FILENAME]
 * `$FILENAME` (optional), this parameter allows to override the exported file name. By default the exported file name will be
   `${provider-name}-docs.${ext}`. Using the `abc` example and outputting HTML, you'll get a file named `abc-docs.html`. Passing
   the optional filename will replace the `${provider-name}-docs` part with your own. Extension is maintained.
+
+Some example calls will be:
+
+```bash
+terraform-gendocs github.com/HewlettPackard/terraform-provider-oneview html      # this will generate an HTML documentation for `terraform-provider-oneview` in an output file called `terraform-docs.html`
+terraform-gendocs github.com/HewlettPackard/terraform-provider-oneview hcl mytf  # this will generate an HCL .tf documentation for `terraform-provider-oneview` in an output file called `mytf.tf`
+```
