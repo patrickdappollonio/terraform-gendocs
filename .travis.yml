@@ -9,7 +9,7 @@ go:
 
 env:
   global:
-    - IMAGE_TAG=patrickdappollonio/terraform-gendocs
+    - IMAGE_TAG=$DOCKER_USERNAME/terraform-gendocs
 
 install:
   - # empty to avoid getting dependencies
