@@ -60,10 +60,10 @@
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown">Jump to resource <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    {{ range .Details }}{{ if not .IsChild }}
+                                    {{ $provider := .InternalName }}{{ range .Details }}{{ if not .IsChild }}
                                         <li>
                                             <a href="#doc-{{ .Resource }}">
-                                                {{ if .IsMainProvider }}Provider{{ else }}Resource{{ end }} "{{ .Resource }}"
+                                                {{ if .IsMainProvider }}Provider{{ else }}Resource{{ end }} "{{ strip_prefix .Resource $provider }}"
                                                 </a>
                                             </li>
                                         {{ end }}{{ end }}

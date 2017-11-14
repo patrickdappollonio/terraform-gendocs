@@ -58,7 +58,9 @@ var (
 			}
 
 			return template.HTML(output)
-
+		},
+		"strip_prefix": func(s, prefix string) string {
+			return strings.TrimPrefix(s, prefix+"_")
 		},
 	}
 
@@ -77,10 +79,11 @@ func printHTMLOutput(w io.Writer, data []parsedData) {
 	pn := findProviderName(data)
 
 	bundle := map[string]interface{}{
-		"Title":     fmt.Sprintf("Documentation for %q Provider", pn),
-		"PageTitle": fmt.Sprintf("Provider %q", pn),
-		"Details":   res,
-		"Updated":   time.Now().Format(time.RFC1123),
+		"Title":        fmt.Sprintf("Documentation for %q Provider", pn),
+		"PageTitle":    fmt.Sprintf("Provider %q", pn),
+		"Details":      res,
+		"Updated":      time.Now().Format(time.RFC1123),
+		"InternalName": pn,
 	}
 
 	if err := t.Execute(w, bundle); err != nil {
