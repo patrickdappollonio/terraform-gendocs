@@ -18,17 +18,8 @@ clean:
 docker:
 	docker build --pull=true --rm=true -t $(IMAGE_TAG) .
 
-release:
-	@$(MAKE) clean
-	@$(MAKE) generate
-	@$(MAKE) build
-	@$(MAKE) remove-gen
+release: clean generate build remove-gen
 
-ci:
-	@$(MAKE) generate
-	@$(MAKE) build
-	@$(MAKE) remove-gen
-	@$(MAKE) docker
-	@$(MAKE) clean
+ci: generate build remove-gen docker clean
 
 .NOTPARALLEL:

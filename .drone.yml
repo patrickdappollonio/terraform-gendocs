@@ -1,0 +1,19 @@
+workspace:
+  base: /go
+  path: src/github.anim.dreamworks.com/pdappollo/terraform-gendocs
+
+pipeline:
+  build:
+    image: golang
+    commands:
+      - make release
+      - ./terraform-gendocs -h
+
+  docker:
+    image: plugins/docker
+    repo: psoregistry.gld.dreamworks.net:5000/pdappollo/registry
+    registry: psoregistry.gld.dreamworks.net:5000
+    insecure: true
+    custom_dns: 10.254.0.53
+    tags: latest
+
