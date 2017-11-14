@@ -1,4 +1,4 @@
-# Terraform Gendocs [![Build Status](https://travis-ci.org/patrickdappollonio/terraform-gendocs.svg?branch=master)](https://travis-ci.org/patrickdappollonio/terraform-gendocs)
+# Terraform Gendocs [![Build Status](https://travis-ci.com/patrickdappollonio/terraform-gendocs.svg?token=EXg9HysCEtbxxFpp8VYg&branch=master)](https://travis-ci.com/patrickdappollonio/terraform-gendocs)
 
 A small project using the `go/ast` package to parse the Go code in a simple Terraform provider code.
 The code iterates over each one of the parameters and tries to parse the different names and attributes
