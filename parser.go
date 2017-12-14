@@ -57,6 +57,18 @@ func parseProvider(providerName string, fset *token.FileSet, fp string) parsedDa
 		resourcename = providerName
 	}
 
+	// Find if this is the state_utils resource, which is
+	// internal, then omit it
+	if strings.HasSuffix(resourcename, "_state_utils") {
+		return parsedData{}
+	}
+
+	// Remove a newly created migrate part if there's a migration
+	// process in the provider
+	if strings.HasSuffix(resourcename, "_migrate") {
+		return parsedData{}
+	}
+
 	// Call the walker by creating a reference first
 	// so we can get the list of attributes after
 	wk := NewWalker(parsed.Decls)

@@ -102,7 +102,9 @@ func main() {
 	// Iterate over each one of the files
 	results := make([]parsedData, 0, len(tffiles))
 	for _, v := range tffiles {
-		results = append(results, parseProvider(internalName, fset, v))
+		if pp := parseProvider(internalName, fset, v); pp.ResourceName != "" {
+			results = append(results, pp)
+		}
 	}
 
 	// Print the output
